@@ -1,0 +1,8 @@
+{
+  "realm": "SpringBootKeycloak",
+  "auth-server-url": "http://localhost:5000/auth",
+  "ssl-required": "external",
+  "resource": "login-app",
+  "public-client": true,
+  "confidential-port": 0
+}
