@@ -1,0 +1,55 @@
+.upload__image-wrapper {
+    height: auto;
+    width: 70%;
+    margin-left: 15%;
+    text-align: center;
+    border: medium dashed;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.upload_file {
+    padding-top: 1%;
+    padding-bottom: 2%;
+}
+
+.image-item {
+    padding-top: 3%;
+    padding-bottom: 1%;
+}
+
+.image-item__btn-wrapper {
+    margin-top: 1%;
+}
+
+img {
+    max-width: 50%;
+    max-height: 50%;
+}
+
+.radio_group {
+    text-align: center;
+    margin-top: 2%;
+}
+
+.date_picker {
+    text-align: center;
+    margin-top: 1%;
+}
+
+.validity_message {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+    text-align: center;
+    margin: 3px 0 0;
+}
+
+.validate_document {
+    text-align: center;
+    margin-top: 2%;
+}
