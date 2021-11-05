@@ -1,25 +1,24 @@
-import React, {useState} from "react";
+import React from "react";
 import ImageUploading from "react-images-uploading";
 import {Button} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import "../../styles/fileUploader.css";
 
-export default function FileUploader() {
-  const [images, setImages] = useState([]);
+export default function FileUploader({onUpload, images}) {
+  const img = images;
   const maxNumber = 1;
 
-  const onChange = (imageList, addUpdateIndex) => {
+  const onChange = (imageList) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList);
+    onUpload(imageList);
   };
 
   return (
     <>
       <ImageUploading
         multiple
-        value={images}
+        value={img}
         onChange={onChange}
         maxNumber={maxNumber}
         dataURLKey="data_url"

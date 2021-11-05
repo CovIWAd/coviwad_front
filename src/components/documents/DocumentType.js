@@ -11,31 +11,40 @@ import "../../styles/fileUploader.css";
 import {DesktopDatePicker, LocalizationProvider} from "@mui/lab";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
-export default function DocumentType() {
-  const [type, setType] = useState("");
+export default function DocumentType({onChangeType, onChangeValid, type, isValid}) {
+  const docType = type;
   const [isTest, setIsTest] = useState(false);
   const [date, setDate] = useState(new Date());
   const [validityDate, setValidityDate] = useState();
-  const [isValid, setIsValid] = useState(false);
+  const isVal = isValid;
 
   useEffect(() => {
-    if(type !== "" && type !== "VACCINE"){
+    if(docType !== "" && docType !== "VACCINE"){
       setIsTest(true);
     } else {
       setIsTest(false);
     }
-  }, [type])
+  }, [docType])
 
   useEffect(() => {
-    if (validityDate !== undefined && validityDate.toLocaleString() <= new Date().toLocaleString()) {
-      setIsValid(false);
-    } else {
-      setIsValid(true);
+    if(validityDate !== undefined){
+      let d = validityDate.split("/");
+      let x = d[1] + "/" + d[0] + "/" + d[2];
+      let d2 = new Date(x);
+      let d1 = new Date()
+      const diffTime = d2 - d1;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if(diffDays < 0){
+        onChangeValid(false);
+      } else {
+        onChangeValid(true);
+      }
     }
-  }, [validityDate])
+  }, [validityDate, onChangeValid])
 
   const handleChange = (event) => {
-    setType(event.target.value);
+    onChangeType(event.target.value);
   };
 
   const handleChangeDate = (newDate) => {
@@ -72,13 +81,11 @@ export default function DocumentType() {
               />
             </LocalizationProvider>
             {validityDate && (
-              <p className="validity_message" style={!isValid ? {color : "red"} : null}>Fin de validité du test : {validityDate}</p>
+              <p className="validity_message" style={!isVal ? {color : "red"} : null}>Fin de validité du test : {validityDate}</p>
             )}
           </div>
         )}
       </div>
-
-
     </>
   );
 }
