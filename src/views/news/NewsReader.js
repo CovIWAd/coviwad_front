@@ -48,7 +48,7 @@ export default function NewsReader() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button href={news.link} size="small">Voir Plus</Button>
+                  <Button href={news.link} target={"_blank"} size="small">Voir Plus</Button>
                 </CardActions>
               </Card>
             </div>
