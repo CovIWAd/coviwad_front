@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import NewsReader from "../views/news/NewsReader";
-import Home from "../views/Home";
+import Home from "../views/Home/Home";
 import AddDocument from "../views/documents/AddDocument";
 
 export default function AppRoutes() {
