@@ -28,11 +28,10 @@ export default function AddDocument() {
   return (
     <>
       <div>
-        <h4>Ajouter des documents</h4>
         <FileUploader onUpload={onUpload} images={images}/>
         <DocumentType onChangeType={onChangeType} onChangeValid={onChangeValid} type={type} isValid={isValid}/>
         <div className="validate_document">
-          <Button variant={"contained"} onClick={onSubmit}>Valider</Button>
+          <Button className="btn turquoiseBackground" variant={"contained"} onClick={onSubmit}>Valider</Button>
         </div>
       </div>
     </>

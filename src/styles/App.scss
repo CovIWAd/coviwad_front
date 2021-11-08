@@ -3,14 +3,10 @@
       font-size: 15px;
       padding: 5px 15px;
       border: 0;
-      background-color: #65C5C1;
       color: #fff;
       border-radius: 3px;
       transition: all 250ms ease-in-out;
       cursor: pointer;
-&:hover {
-     background-color: #65C5C1;
- }
 &:focus {
      outline: none;
  }
@@ -32,4 +28,24 @@
 
 .ceriseColor {
   color: #D1345B;
+}
+
+// color background
+.turquoiseBackground{
+  background-color: #65C5C1 !important;
+}
+
+.ceriseBackground {
+  background-color: #D1345B;
+}
+
+//remove default css link
+a:link
+{
+  text-decoration:none;
+  color: black;
+}
+
+.text-center {
+  text-align: center;
 }

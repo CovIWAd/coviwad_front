@@ -1,16 +1,14 @@
 import {Route, Routes} from "react-router-dom";
 import NewsReader from "../views/news/NewsReader";
-import Home from "../views/Home/Home";
-import AddDocument from "../views/documents/AddDocument";
+import Home from "../views/home/Home";
+import MyDocuments from "../views/documents/MyDocuments";
 
 export default function AppRoutes() {
   return (
     <Routes>
-      {/*<Route path="/" exact component={Home} />
-      <Route path="/news" exact component={NewsReader} />*/}
-      <Route path="/" element={<Home />} />
-      <Route path="/news" element={<NewsReader />} />
-      <Route path="/documents" element={<AddDocument />} />
+      <Route path="/" element={<Home />} exact/>
+      <Route path="/news" element={<NewsReader />} exact/>
+      <Route path="/documents" element={<MyDocuments />} exact />
     </Routes>
   );
 }
