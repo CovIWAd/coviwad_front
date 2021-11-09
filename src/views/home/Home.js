@@ -31,6 +31,11 @@ export default function Home() {
                             {keycloak.authenticated ? (
                                 <div>
                                     <h1 className="darkBlueColor">Hello!</h1>
+                                    <div>
+                                        <button className="btn btnSituation greenBackground" >Je suis négatif</button>
+                                        <button className="btn btnSituation orangeBackground" >Je suis cas contact</button>
+                                        <button className="btn btnSituation ceriseBackground" >Je suis positif</button>
+                                    </div>
                                     <button className="btn turquoiseBackground" onClick={logout}>Logout</button>
                                 </div>
 
