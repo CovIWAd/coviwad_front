@@ -28,7 +28,7 @@ export default function MyDocument() {
                                     onClick={onCloseClick}
                             > x Close
                             </button>
-                            <AddDocument/>
+                            <AddDocument onCloseClick={onCloseClick}/>
                         </>
                     )
 

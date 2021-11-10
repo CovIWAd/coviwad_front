@@ -34,7 +34,10 @@ export default function Home() {
 
                             {keycloak.authenticated ? (
                                 <div>
-                                    <h1 className="darkBlueColor">Hello!</h1>
+                                    <h1 className="darkBlueColor">Hello {keycloak.tokenParsed.given_name+
+                                    " " +
+                                    keycloak.tokenParsed.family_name}!</h1>
+
                                     <div>
                                         <button className="btn btnSituation greenBackground" >Je suis négatif</button>
                                         <button className="btn btnSituation orangeBackground" >Je suis cas contact</button>
