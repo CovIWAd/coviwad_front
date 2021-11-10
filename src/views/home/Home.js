@@ -26,7 +26,9 @@ export default function Home() {
                     <div className="base-container">
                         <div className="content">
                             <div className="image">
-                                <img src={logo} alt={""}/>
+
+                                <img src={logo} alt="logo"/>
+
                             </div>
 
 
