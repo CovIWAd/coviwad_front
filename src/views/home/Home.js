@@ -1,5 +1,5 @@
 import {useKeycloak} from "@react-keycloak/web";
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import '../../styles/Home.scss';
 import '../../styles/App.scss';
 import logo from "../../logo.png";
@@ -16,13 +16,17 @@ export default function Home() {
         keycloak.logout();
     }, [keycloak]);
 
+    useEffect(() => {
+        console.log(keycloak.authenticated);
+    },[keycloak])
+
     return (
             <div className="App">
                 <div className="card">
                     <div className="base-container">
                         <div className="content">
                             <div className="image">
-                                <img src={logo}/>
+                                <img src={logo} alt={""}/>
                             </div>
 
 

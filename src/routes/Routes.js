@@ -1,5 +1,5 @@
 import {
-    Route, Routes, BrowserRouter
+    Route, BrowserRouter as Routes, Switch
 } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import NewsReader from "../views/news/NewsReader";
@@ -9,32 +9,20 @@ import MyDocuments from "../views/documents/MyDocuments";
 export default function AppRoutes() {
     return (
         <Routes>
-                <Route path="/" element={<Home/>} exact/>
-                <Route
-                    path="/news"
-                    element={
-                        <PrivateRoute>
-                            <NewsReader/>
-                        </PrivateRoute>
-                    } exact/>
-                <PrivateRoute
-                    path="/documents"
-                    element={
-                        <PrivateRoute>
-                            <MyDocuments/>
-                        </PrivateRoute>
-                    } exact/>
-
-
-                <Route
-                    path="*"
-                    element={
-                        <main style={{padding: "1rem"}}>
-                            <p>There's nothing here!</p>
-                        </main>
-                    }
-                />
-            </Routes>
+          <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/news" component={NewsReader}/>
+                <PrivateRoute exact roles={['app-user']} path="/documents" component={MyDocuments}/>
+                {/*<Route*/}
+                {/*    path="*"*/}
+                {/*    element={*/}
+                {/*        <main style={{padding: "1rem"}}>*/}
+                {/*            <p>There's nothing here!</p>*/}
+                {/*        </main>*/}
+                {/*    }*/}
+                {/*/>*/}
+          </Switch>
+        </Routes>
 
     );
 }
