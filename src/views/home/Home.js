@@ -17,7 +17,7 @@ export default function Home() {
     }, [keycloak]);
 
     useEffect(() => {
-        console.log(keycloak.authenticated);
+        console.log(keycloak.hasRealmRole("app-user"), keycloak.hasResourceRole("app-user"))
     },[keycloak])
 
     return (

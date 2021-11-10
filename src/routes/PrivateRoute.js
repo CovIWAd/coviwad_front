@@ -1,10 +1,12 @@
-import {Route, Redirect} from "react-router-dom";
-import {useKeycloak} from "@react-keycloak/web";
+import { useKeycloak } from '@react-keycloak/web';
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, roles, ...rest }) => {
-    const {keycloak} = useKeycloak();
 
-    const isAuthorized = (roles) => {
+export default function PrivateRoute({ component: Component, roles, ...rest }) {
+    const [keycloak] = useKeycloak();
+
+    const isAutherized = (roles) => {
         if (keycloak && roles) {
             return roles.some(r => {
                 const realm =  keycloak.hasRealmRole(r);
@@ -19,14 +21,10 @@ const PrivateRoute = ({ component: Component, roles, ...rest }) => {
       <Route
         {...rest}
         render={props => {
-            return keycloak?.authenticated ?
-              (isAuthorized(roles) ? <Component {...props} /> : <Redirect to={"/"}/> )
-              : keycloak.login()
+            return isAutherized(roles)
+              ? <Component {...props} />
+              : <Redirect to={{ pathname: '/', }} />
         }}
       />
     )
-
-
 }
-
-export default PrivateRoute
