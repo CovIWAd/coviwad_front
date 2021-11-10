@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
+import {Card, CardContent, Typography} from "@mui/material";
 import {useKeycloak} from "@react-keycloak/web";
 
-export default function NewsReader() {
+export default function AllDocuments() {
   const [results, setResults] = useState([]);
   const {keycloak} = useKeycloak();
 
@@ -10,9 +10,10 @@ export default function NewsReader() {
 
     async function fetchData() {
       let accessToken = keycloak.token;
+      console.log(accessToken)
 
-        //ALL NEWS
-      await fetch(`http://localhost:8081/api/news/all`,
+      //ALL NEWS
+      await fetch(`http://localhost:8082/api/documents`,
         {
           method: "GET",
           headers: new Headers({
@@ -37,24 +38,15 @@ export default function NewsReader() {
         alignItems: "center",
         maxWidth: "100%"
       }}>
-        { results.length > 0 && results.map((news,index) => {
+        { results.length > 0 && results.map((doc,index) => {
           return (
-            <div style={{width: "30%", margin: "1%"}}>
+            <div style={{width: "30%", margin: "1%"}} key={index}>
               <Card variant="outlined" key={index}>
                 <CardContent>
                   <Typography sx={{ fontSize: 14 }} color="textSecondary" gutterBottom>
-                    {news.subtitle}
-                  </Typography>
-                  <Typography variant="h5" component="div">
-                    {news.title}
-                  </Typography>
-                  <Typography variant="body2">
-                    {news.article}
+                    {doc.documentId}
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Button href={news.link} target={"_blank"} size="small">Voir Plus</Button>
-                </CardActions>
               </Card>
             </div>
           )

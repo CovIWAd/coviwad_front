@@ -5,6 +5,7 @@ import PrivateRoute from "./PrivateRoute";
 import NewsReader from "../views/news/NewsReader";
 import Home from "../views/home/Home";
 import MyDocuments from "../views/documents/MyDocuments";
+import AllDocuments from "../views/documents/AllDocuments";
 
 export default function AppRoutes() {
     return (
@@ -12,6 +13,7 @@ export default function AppRoutes() {
           <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/news" component={NewsReader}/>
+                <PrivateRoute exact roles={['app-user']} path="/doc" component={AllDocuments}/>
                 <PrivateRoute exact roles={['app-user']} path="/documents" component={MyDocuments}/>
                 {/*<Route*/}
                 {/*    path="*"*/}
