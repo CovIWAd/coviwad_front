@@ -97,11 +97,11 @@ export default function AddDocument({onCloseClick}) {
                 .then(async (res) => {
                     let r = await res.json();
                     console.log(r);
+                    setOpen(true);
                 });
         }
 
         addDocument();
-        setOpen(true);
 
     }
 
@@ -116,7 +116,7 @@ export default function AddDocument({onCloseClick}) {
                               onChangeIsPositive={onChangeIsPositive} isPositive={isPositive}
                 />
 
-                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Snackbar open={open} autoHideDuration={1500} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                         Document successfully added!
                     </Alert>
