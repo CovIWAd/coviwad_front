@@ -1,20 +1,26 @@
 import React from "react";
-import {BrowserRouter} from "react-router-dom";
+import keycloak from "./keycloak";
 import AppRoutes from "./routes/Routes";
-import {useKeycloak} from "@react-keycloak/web";
-import ButtonAppBar from "./views/navbar/Navbar";
+import { ReactKeycloakProvider } from '@react-keycloak/web'
 
 
 function App() {
+  const eventLogger = (event, error) => {
+    console.log('onKeycloakEvent', event, error)
+  }
 
-    const {keycloak} = useKeycloak();
+  const tokenLogger = (tokens) => {
+    console.log('onKeycloakTokens', tokens)
+  }
 
-    return (
-      <BrowserRouter>
-          {keycloak.authenticated && (
-          <ButtonAppBar/> )}
-          <AppRoutes/>
-      </BrowserRouter>
+  return (
+      <ReactKeycloakProvider
+        authClient={keycloak}
+        onEvent={eventLogger}
+        onTokens={tokenLogger}
+      >
+        <AppRoutes/>
+      </ReactKeycloakProvider>
     );
 }
 

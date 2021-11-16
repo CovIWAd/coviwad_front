@@ -1,12 +1,10 @@
-import Keycloak from "keycloak-js";
+import Keycloak from 'keycloak-js';
 
-const instance = new Keycloak("./keycloak.json");
+const keycloak = new Keycloak({
+  url: "http://localhost:5000/auth",
+  realm: "SpringBootKeycloak",
+  clientId: "front-app",
+});
 
-const initConfig = {
-  onLoad: "login-required",
-};
+export default keycloak;
 
-export const keycloak = {
-  instance: instance,
-  initConfig: initConfig,
-};

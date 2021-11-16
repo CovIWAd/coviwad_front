@@ -60,9 +60,15 @@ export default function ButtonAppBar() {
                     >
                         <MenuItem onClick={handleClose}> <Link to='/news'>News </Link></MenuItem>
 
-                        <MenuItem onClick={handleClose}> <Link to='/documents'>My documents</Link></MenuItem>
+                      {keycloak.authenticated && (
+                        <>
+                          <MenuItem onClick={handleClose}> <Link to='/documents'>My documents</Link></MenuItem>
 
-                        <MenuItem onClick={logout}>Logout</MenuItem>
+                          <MenuItem onClick={logout}>Logout</MenuItem>
+                        </>
+                        )}
+
+
                     </Menu>
                     <Typography variant="h6" className={classes.title}>
                        CovIWAd
