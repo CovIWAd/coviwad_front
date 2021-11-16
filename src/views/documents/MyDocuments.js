@@ -6,6 +6,7 @@ import DocumentCard from "../../components/documents/DocumentCard";
 import {useKeycloak} from "@react-keycloak/web";
 
 
+
 export default function MyDocument() {
     const {keycloak} = useKeycloak();
 
@@ -25,14 +26,12 @@ export default function MyDocument() {
     useEffect(() => {
 
         async function fetchDocs() {
-            //ALL NEWS
             await fetch(`http://localhost:8082/api/documents/user/${keycloak.tokenParsed.sub}`,
                 {
                     method: "GET",
                     headers: new Headers({
                         Accept: "application/json",
                         "Content-Type": "application/json",
-                        "Access-Control-Origin": "*",
                         Authorization: `Bearer ${keycloak.token}`
                     }),
                     mode: "cors"
@@ -45,12 +44,25 @@ export default function MyDocument() {
 
         fetchDocs();
         console.log(docs);
-    }, []);
+    }, [keycloak.token]);
 
     const onDeleteAction = (documentId) => {
-        // TODO
-        console.log("to do");
-        return;
+        console.log("here bro");
+        async function deleteDoc(documentId) {
+            await fetch(`http://localhost:8082/api/documents/${documentId}`, {
+                method: "DELETE",
+                headers: new Headers({
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${keycloak.token}`
+                }),
+                mode: "cors"
+            }).then(async (res) => {
+                let r = await res.json();
+                // remove doc from docs
+            });
+        }
+        deleteDoc(documentId);
     }
 
     return (
@@ -65,7 +77,7 @@ export default function MyDocument() {
                                     onClick={onCloseClick}
                             > x Close
                             </button>
-                            <AddDocument onCloseClick={onCloseClick}/>
+                            <AddDocument onCloseClick={onCloseClick} setDocs={setDocs}/>
                         </>
                     )
 
@@ -78,10 +90,11 @@ export default function MyDocument() {
 
             </div>
 
-            <div>
-                {docs.length != 0 && docs.map((c) => {
-                    return  <DocumentCard key = {c.documentId}
-                                         // onDeleteAction={onDeleteAction}
+         <div className="containerCards">
+                {docs.length != 0 && docs.map((c, index) => {
+
+                    return  <DocumentCard
+                  onDeleteAction={onDeleteAction}
                                           documentId = {c.documentId}
                                           documentType={c.documentType}
                                           testDate={c.testDate}

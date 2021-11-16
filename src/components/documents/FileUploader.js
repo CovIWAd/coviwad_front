@@ -46,7 +46,7 @@ export default function FileUploader({onUpload, images}) {
             <Button onClick={onImageRemoveAll}>Remove all images</Button>
             {imageList.map((image, index) => (
               <div key={index} className="image-item">
-                <img src={image.data_url} alt="" />
+                <img className="imgUploader" src={image.data_url} alt="" />
                 <div className="image-item__btn-wrapper">
                   <Button startIcon={<EditIcon />} style={{marginRight: "8%", color: "#e88b15"}} onClick={() => onImageUpdate(index)}>Update</Button>
                   <Button startIcon={<DeleteIcon />} style={{color: "#d4410e"}} onClick={() => onImageRemove(index)}>Remove</Button>

@@ -8,7 +8,7 @@ import DocumentType from "../../components/documents/DocumentType";
 import {useKeycloak} from "@react-keycloak/web";
 
 
-export default function AddDocument({onCloseClick}) {
+export default function AddDocument({onCloseClick, setDocs}) {
     const {keycloak} = useKeycloak();
 
     //File Uploader state
@@ -97,6 +97,10 @@ export default function AddDocument({onCloseClick}) {
                 .then(async (res) => {
                     let r = await res.json();
                     console.log(r);
+                    setDocs(oldDocs => {
+                        oldDocs.push(r)
+                        return oldDocs
+                    })
                     setOpen(true);
                 });
         }

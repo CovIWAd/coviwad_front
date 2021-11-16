@@ -1,3 +1,18 @@
 .leftButton{
     margin-left: 3em;
 }
+
+.containerCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.cardDoc {
+    margin-top: 2em;
+}
+
+.imgCard {
+    max-width: 50%;
+}
