@@ -1,5 +1,5 @@
 import {useKeycloak} from "@react-keycloak/web";
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback} from "react";
 import '../../styles/Home.scss';
 import '../../styles/App.scss';
 import logo from "../../logo.png";
@@ -15,10 +15,6 @@ export default function Home() {
     const logout = useCallback(() => {
         keycloak.logout();
     }, [keycloak]);
-
-    useEffect(() => {
-        console.log(keycloak.hasRealmRole("app-user"), keycloak.hasResourceRole("app-user"))
-    },[keycloak])
 
     return (
             <div className="App">
