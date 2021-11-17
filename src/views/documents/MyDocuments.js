@@ -47,7 +47,7 @@ export default function MyDocument() {
     }, [keycloak.token]);
 
     const onDeleteAction = (documentId) => {
-        console.log("here bro");
+
         async function deleteDoc(documentId) {
             await fetch(`http://localhost:8082/api/documents/${documentId}`, {
                 method: "DELETE",
@@ -57,9 +57,10 @@ export default function MyDocument() {
                     Authorization: `Bearer ${keycloak.token}`
                 }),
                 mode: "cors"
-            }).then(async (res) => {
-                let r = await res.json();
-                // remove doc from docs
+            }).then(async () => {
+
+                setDocs(oldDocs => oldDocs.filter(doc => doc.documentId !== documentId))
+
             });
         }
         deleteDoc(documentId);
@@ -91,14 +92,14 @@ export default function MyDocument() {
             </div>
 
          <div className="containerCards">
-                {docs.length != 0 && docs.map((c, index) => {
+                {docs.length !== 0 && docs.map((doc, index) => {
 
                     return  <DocumentCard
                   onDeleteAction={onDeleteAction}
-                                          documentId = {c.documentId}
-                                          documentType={c.documentType}
-                                          testDate={c.testDate}
-                                          file={c.file}
+                                          documentId = {doc.documentId}
+                                          documentType={doc.documentType}
+                                          testDate={doc.testDate}
+                                          file={doc.file}
                     />
                     }
                 )}
