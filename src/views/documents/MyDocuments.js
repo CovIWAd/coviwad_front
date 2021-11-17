@@ -43,8 +43,7 @@ export default function MyDocument() {
         }
 
         fetchDocs();
-        console.log(docs);
-    }, [keycloak.token]);
+    }, [keycloak.token, keycloak.tokenParsed.sub]);
 
     const onDeleteAction = (documentId) => {
 

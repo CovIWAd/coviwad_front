@@ -8,6 +8,7 @@ import MyDocuments from "../views/documents/MyDocuments";
 import {useKeycloak} from "@react-keycloak/web";
 import ButtonAppBar from "../views/navbar/Navbar";
 import React from "react";
+import MyProfile from "../views/users/MyProfile";
 
 export default function AppRoutes() {
   const { initialized } = useKeycloak()
@@ -23,6 +24,7 @@ export default function AppRoutes() {
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/news" component={NewsReader}/>
                 <PrivateRoute exact roles={['app-user']} path="/documents" component={MyDocuments}/>
+                <PrivateRoute exact roles={['app-user', 'app-admin']} path="/profile" component={MyProfile}/>
           </Switch>
         </Routes>
 
