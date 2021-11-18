@@ -8,12 +8,7 @@ import UserCard from "../../components/users/UserCard";
 export default function MyProfile() {
   const {keycloak} = useKeycloak();
 
-  const [user, setUser] = useState({
-    first_name: "Theo",
-    last_name: "Huhu",
-    email: "eheh@eheh.fr",
-    username: "thethe"
-  });
+  const [user, setUser] = useState({});
 
   useEffect(() => {
 
@@ -63,7 +58,7 @@ export default function MyProfile() {
         <h2 className="text-center">My profile</h2>
         {user && (
           <div>
-            <UserCard user={user} onUpdate={(s) => onUpdate(s)}/>
+            <UserCard user={user} onUpdate={(s) => onUpdate(s)} setUser={setUser}/>
           </div>
         )}
       </div>
