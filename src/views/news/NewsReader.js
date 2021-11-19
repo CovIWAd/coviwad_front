@@ -12,7 +12,7 @@ export default function NewsReader() {
       let accessToken = keycloak.token;
 
         //ALL NEWS
-      await fetch(`http://localhost:8081/api/news/all`,
+      await fetch(`http://localhost:8080/api/news/all`,
         {
           method: "GET",
           headers: new Headers({

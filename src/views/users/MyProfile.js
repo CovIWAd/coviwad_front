@@ -13,7 +13,7 @@ export default function MyProfile() {
   useEffect(() => {
 
     async function fetchUser() {
-      await fetch(`http://localhost:8084/api/users/${keycloak.tokenParsed.sub}`,
+      await fetch(`http://localhost:8080/api/users/${keycloak.tokenParsed.sub}`,
         {
           method: "GET",
           headers: new Headers({
@@ -34,7 +34,7 @@ export default function MyProfile() {
   }, [keycloak.token, keycloak.tokenParsed.sub]);
 
   const onUpdate = async (changedInfo) => {
-    await fetch(`http://localhost:8084/api/users/${keycloak.tokenParsed.sub}`,
+    await fetch(`http://localhost:8080/api/users/${keycloak.tokenParsed.sub}`,
       {
         method: "PUT",
         headers: new Headers({

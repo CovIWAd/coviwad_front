@@ -77,7 +77,7 @@ export default function AddDocument({onCloseClick, setDocs}) {
 
         async function addDocument() {
 
-            await fetch(`http://localhost:8082/api/documents`,
+            await fetch(`http://localhost:8080/api/documents`,
                 {
                     method: "POST",
                     headers: new Headers({
