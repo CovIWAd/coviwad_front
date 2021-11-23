@@ -50,8 +50,6 @@ export default function AddDocument({onCloseClick, setDocs}) {
     }, [type, images]);
 
 
-    // TODO faire quelque chose si le test est positif ? Prévenir qui ?
-
     // for alert
 
     const [open, setOpen] = React.useState(false);
@@ -77,7 +75,8 @@ export default function AddDocument({onCloseClick, setDocs}) {
 
         async function addDocument() {
 
-            await fetch(`http://localhost:8082/api/geolocation`,
+
+            await fetch(`http://localhost:8080/api/documents`,
                 {
                     method: "POST",
                     headers: new Headers({

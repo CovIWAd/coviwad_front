@@ -1,29 +1,49 @@
-import {Button, Card, CardContent, FormGroup} from "@mui/material";
+import "../../styles/App.scss";
+import {Button, Card, CardContent, FormControl, FormHelperText} from "@mui/material";
 import UserInfo from "./UserInfo";
 import UserFormUpdate from "./UserFormUpdate";
 import EditIcon from '@mui/icons-material/Edit';
 import EditOffIcon from '@mui/icons-material/EditOff';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-export default function UserCard({user, onUpdate}) {
+export default function UserCard({user, onUpdate, setUser}) {
   const [isUpdate, setIsUpdate] = useState(false);
+  const [error, setError] = useState("");
   const [state, setState] = useState({
     first_name: "",
-    last_name: "",
-    email: ""
+    last_name: ""
   })
+
+  useEffect(() => {
+    if(user){
+      setState({
+        first_name: user.first_name,
+        last_name: user.last_name
+      })
+    }
+  }, [user])
 
   const handleUpdate = () => {
     setIsUpdate(!isUpdate);
   }
 
   const handleSubmit = () => {
-    onUpdate(state);
+    let newUser = {
+      ...user,
+      ...state
+    }
+    setUser(newUser)
+    onUpdate(newUser);
     setIsUpdate(false);
   }
 
   const handleChange = (e) => {
     const value = e.target.value;
+    if(value === ""){
+      setError("Input cannot be empty.")
+    } else {
+      setError("")
+    }
     setState({
       ...state,
       [e.target.name]: value
@@ -40,22 +60,22 @@ export default function UserCard({user, onUpdate}) {
           )}
 
         <UserInfo label={"Username (can't be changed) : "} value={user.username}/>
+        <UserInfo label={"Email : "} value={user.email}/>
 
         {!isUpdate ? (
           <>
             <UserInfo label={"First Name : "} value={user.first_name}/>
             <UserInfo label={"Last Name : "} value={user.last_name}/>
-            <UserInfo label={"Email : "} value={user.email}/>
           </>
         ) : (
-          <FormGroup onSubmit={handleSubmit}>
+          <FormControl onSubmit={handleSubmit}>
             <UserFormUpdate field={"first_name"} label={"First Name"} defaultValue={user.first_name} onChange={handleChange}/>
             <UserFormUpdate field={"last_name"} label={"Last Name"} defaultValue={user.last_name} onChange={handleChange}/>
-            <UserFormUpdate field={"email"} label={"Email"} defaultValue={user.email} onChange={handleChange}/>
 
-            <Button type={"submit"} size="small">Modifier</Button>
+            <FormHelperText className="ceriseColor">{error}</FormHelperText>
+            <Button disabled={error !== ""} type={"submit"} size="small">Modifier</Button>
 
-          </FormGroup>
+          </FormControl >
         )}
 
       </CardContent>

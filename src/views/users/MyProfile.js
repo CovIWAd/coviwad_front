@@ -8,17 +8,12 @@ import UserCard from "../../components/users/UserCard";
 export default function MyProfile() {
   const {keycloak} = useKeycloak();
 
-  const [user, setUser] = useState({
-    first_name: "Theo",
-    last_name: "Huhu",
-    email: "eheh@eheh.fr",
-    username: "thethe"
-  });
+  const [user, setUser] = useState({});
 
   useEffect(() => {
 
     async function fetchUser() {
-      await fetch(`http://localhost:8084/api/users/${keycloak.tokenParsed.sub}`,
+      await fetch(`http://localhost:8080/api/users/${keycloak.tokenParsed.sub}`,
         {
           method: "GET",
           headers: new Headers({
@@ -39,7 +34,7 @@ export default function MyProfile() {
   }, [keycloak.token, keycloak.tokenParsed.sub]);
 
   const onUpdate = async (changedInfo) => {
-    await fetch(`http://localhost:8084/api/users/${keycloak.tokenParsed.sub}`,
+    await fetch(`http://localhost:8080/api/users/${keycloak.tokenParsed.sub}`,
       {
         method: "PUT",
         headers: new Headers({
@@ -63,7 +58,7 @@ export default function MyProfile() {
         <h2 className="text-center">My profile</h2>
         {user && (
           <div>
-            <UserCard user={user} onUpdate={(s) => onUpdate(s)}/>
+            <UserCard user={user} onUpdate={(s) => onUpdate(s)} setUser={setUser}/>
           </div>
         )}
       </div>

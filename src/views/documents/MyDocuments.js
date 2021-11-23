@@ -26,7 +26,7 @@ export default function MyDocument() {
     useEffect(() => {
 
         async function fetchDocs() {
-            await fetch(`http://localhost:8082/api/documents/user/${keycloak.tokenParsed.sub}`,
+            await fetch(`http://localhost:8080/api/documents/user/${keycloak.tokenParsed.sub}`,
                 {
                     method: "GET",
                     headers: new Headers({
@@ -48,7 +48,7 @@ export default function MyDocument() {
     const onDeleteAction = (documentId) => {
 
         async function deleteDoc(documentId) {
-            await fetch(`http://localhost:8082/api/documents/${documentId}`, {
+            await fetch(`http://localhost:8080/api/documents/${documentId}`, {
                 method: "DELETE",
                 headers: new Headers({
                     Accept: "application/json",
