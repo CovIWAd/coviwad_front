@@ -77,7 +77,7 @@ export default function AddDocument({onCloseClick, setDocs}) {
 
         async function addDocument() {
 
-            await fetch(`http://localhost:8082/api/documents`,
+            await fetch(`http://localhost:8082/api/geolocation`,
                 {
                     method: "POST",
                     headers: new Headers({
@@ -106,6 +106,34 @@ export default function AddDocument({onCloseClick, setDocs}) {
         }
 
         addDocument();
+
+        if(isPositive){
+
+            //TESTER
+            async function triggerPositive() {
+
+                await fetch(`http://localhost:8080/api/geolocation/positive`, //TODO mettre la bonne route!!
+                    {
+                        method: "POST",
+                        headers: new Headers({
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            "Access-Control-Origin": "*",
+                            Authorization: `Bearer ${keycloak.token}`
+                        }),
+                        body: JSON.stringify({
+                            'idUserCovid': keycloak.tokenParsed.sub,
+                            //'date': format(new Date(testDate), 'yyyy-MM-dd')
+                        })
+                    })
+                    .then(async (res) => {
+                        let r = await res.json();
+                        console.log(r);
+                    });
+            }
+
+            triggerPositive();
+        }
 
     }
 
