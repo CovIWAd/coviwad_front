@@ -47,7 +47,7 @@ export default function Home() {
                         Authorization: `Bearer ${keycloak.token}`
                     }),
                     body: JSON.stringify({
-                        'idUserCovid': keycloak.tokenParsed.sub,
+                        'userId': keycloak.tokenParsed.sub,
                         'latitude' : latitude,
                         'longitude' : longitude,
                         'date': timestamp
@@ -60,13 +60,13 @@ export default function Home() {
                 });
         }
 
-        addPosition();
-        
-    },[latitude,
-        longitude,
-        timestamp,]);
+        if(keycloak.tokenParsed !== undefined){
+            addPosition();
+        }
 
-    const onPositiveCliked = () => {
+    },[]);
+
+    const onPositiveClicked = () => {
       //TESTER
         async function triggerPositive() {
 
@@ -80,7 +80,7 @@ export default function Home() {
                         Authorization: `Bearer ${keycloak.token}`
                     }),
                     body: JSON.stringify({
-                        'idUserCovid': keycloak.tokenParsed.sub,
+                        'userId': keycloak.tokenParsed.sub,
                     //'date': format(new Date(), 'yyyy-MM-dd')
                     })
                 })
@@ -117,7 +117,7 @@ export default function Home() {
                                     {/*  <button className="btn btnSituation greenBackground" >Je suis négatif</button>
                                         <button className="btn btnSituation orangeBackground" >Je suis cas contact</button>
                                         */}
-                                    <button className="btn btnSituation ceriseBackground" onClick={onPositiveCliked}>Je
+                                    <button className="btn btnSituation ceriseBackground" onClick={onPositiveClicked}>Je
                                         suis positif
                                     </button>
                                 </div>
