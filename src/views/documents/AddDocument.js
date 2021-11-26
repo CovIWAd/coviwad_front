@@ -121,8 +121,8 @@ export default function AddDocument({onCloseClick, setDocs}) {
                             Authorization: `Bearer ${keycloak.token}`
                         }),
                         body: JSON.stringify({
-                            'idUserCovid': keycloak.tokenParsed.sub,
-                            //'date': format(new Date(testDate), 'yyyy-MM-dd')
+                            //'idUserCovid': keycloak.tokenParsed.sub,
+                            'testDate': format(new Date(testDate), 'yyyy-MM-dd')
                         })
                     })
                     .then(async (res) => {

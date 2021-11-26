@@ -1,5 +1,6 @@
 import {useKeycloak} from "@react-keycloak/web";
 import React, {useCallback, useEffect} from "react";
+import {format} from 'date-fns';
 import '../../styles/Home.scss';
 import '../../styles/App.scss';
 import logo from "../../logo.png";
@@ -26,7 +27,7 @@ export default function Home() {
         longitude,
         timestamp,
         error,
-    } = usePosition(watch, {enableHighAccuracy: true, timeout: 60000});
+    } = usePosition(watch, {enableHighAccuracy: true});
 
 
     useEffect(() => {
@@ -50,7 +51,7 @@ export default function Home() {
                         'userId': keycloak.tokenParsed.sub,
                         'latitude' : latitude,
                         'longitude' : longitude,
-                        'date': timestamp
+                        'geolocationDate': format(new Date(timestamp), 'yyyy-MM-dd')
                     })
                 })
                 .then(async (res) => {
@@ -83,7 +84,7 @@ export default function Home() {
                         Authorization: `Bearer ${keycloak.token}`
                     }),
                     body: JSON.stringify({
-                        'userId': keycloak.tokenParsed.sub,
+                        //'userId': keycloak.tokenParsed.sub,
                     //'date': format(new Date(), 'yyyy-MM-dd')
                     })
                 })
