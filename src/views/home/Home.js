@@ -61,7 +61,7 @@ export default function Home() {
                 });
         }
 
-        if(keycloak.tokenParsed !== undefined){
+        if(keycloak.tokenParsed !== undefined && latitude !== undefined && longitude !== undefined && timestamp !== undefined){
             const interval = setInterval(() => {
                 addPosition();
             }, 60000);
