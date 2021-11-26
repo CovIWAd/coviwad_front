@@ -61,7 +61,10 @@ export default function Home() {
         }
 
         if(keycloak.tokenParsed !== undefined){
-            addPosition();
+            const interval = setInterval(() => {
+                addPosition();
+            }, 60000);
+            return () => clearInterval(interval);
         }
 
     },[]);

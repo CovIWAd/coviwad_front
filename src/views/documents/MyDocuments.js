@@ -91,7 +91,7 @@ export default function MyDocument() {
             </div>
 
          <div className="containerCards">
-                {docs.length !== 0 && docs.map((doc, index) => {
+                {docs.length > 0 && docs.map((doc, index) => {
 
                     return  <DocumentCard
                   onDeleteAction={onDeleteAction}
