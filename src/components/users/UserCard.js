@@ -68,12 +68,12 @@ export default function UserCard({user, onUpdate, setUser}) {
             <UserInfo label={"Last Name : "} value={user.last_name}/>
           </>
         ) : (
-          <FormControl onSubmit={handleSubmit}>
+          <FormControl>
             <UserFormUpdate field={"first_name"} label={"First Name"} defaultValue={user.first_name} onChange={handleChange}/>
             <UserFormUpdate field={"last_name"} label={"Last Name"} defaultValue={user.last_name} onChange={handleChange}/>
 
             <FormHelperText className="ceriseColor">{error}</FormHelperText>
-            <Button disabled={error !== ""} type={"submit"} size="small">Modifier</Button>
+            <Button disabled={error !== ""} onClick={handleSubmit} size="small">Modifier</Button>
 
           </FormControl >
         )}

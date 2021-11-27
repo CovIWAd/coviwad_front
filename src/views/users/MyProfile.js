@@ -55,9 +55,9 @@ export default function MyProfile() {
   return (
     <>
       <div>
-        <h2 className="text-center">My profile</h2>
+        <h2 className={"text-center"}>My profile</h2>
         {user && (
-          <div>
+          <div className="card-center">
             <UserCard user={user} onUpdate={(s) => onUpdate(s)} setUser={setUser}/>
           </div>
         )}
