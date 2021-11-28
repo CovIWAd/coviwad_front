@@ -5,6 +5,8 @@ import '../../styles/Home.scss';
 import '../../styles/App.scss';
 import logo from "../../logo.png";
 import {usePosition} from 'use-position';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 export default function Home() {
     const {keycloak} = useKeycloak();
@@ -13,6 +15,21 @@ export default function Home() {
         keycloak.login();
     }, [keycloak]);
 
+
+    const [open, setOpen] = React.useState(false);
+
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     /*
         const logout = useCallback(() => {
             keycloak.logout();
@@ -68,7 +85,7 @@ export default function Home() {
             return () => clearInterval(interval);
         }
 
-    },[]);
+    },[longitude,latitude]);
 
     const onPositiveClicked = () => {
       //TESTER
@@ -91,6 +108,7 @@ export default function Home() {
                 .then(async (res) => {
                     let r = await res.json();
                     console.log(r);
+                    setOpen(true);
                 });
         }
 
@@ -140,6 +158,13 @@ export default function Home() {
                         )}
                     </div>
                 </div>
+            </div>
+            <div>
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Your situation is up to date ! You are positive to COVID.
+                    </Alert>
+                </Snackbar>
             </div>
         </div>
 
