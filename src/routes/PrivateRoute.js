@@ -1,11 +1,30 @@
-import {Route, Link, Navigate} from "react-router-dom";
-import {useKeycloak} from "@react-keycloak/web";
+import { useKeycloak } from '@react-keycloak/web';
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
 
-const PrivateRoute = ({children}) => {
+
+export default function PrivateRoute({ component: Component, roles, ...rest }) {
     const {keycloak} = useKeycloak();
 
-    return keycloak.authenticated ? children : <Navigate to ="/" />;
+    const isAutherized = (roles) => {
+       if (keycloak && roles) {
+            return roles.some(r => {
+                const realm =  keycloak.hasRealmRole(r);
+                const resource = keycloak.hasResourceRole(r);
+                return realm || resource;
+            });
+        }
+        return false;
+    }
 
+    return (
+      <Route
+        {...rest}
+        render={props => {
+            return isAutherized(roles)
+              ? <Component {...props} />
+              : <Redirect to={{ pathname: '/', }} />
+        }}
+      />
+    )
 }
-
-export default PrivateRoute

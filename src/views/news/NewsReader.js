@@ -1,18 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, CardActions, CardContent, Typography} from "@mui/material";
+import {useKeycloak} from "@react-keycloak/web";
 
 export default function NewsReader() {
   const [results, setResults] = useState([]);
+  const {keycloak} = useKeycloak();
 
   useEffect(() => {
 
     async function fetchData() {
-      //ALL NEWS
-      await fetch(`http://localhost:8081/api/news/all`,
+      let accessToken = keycloak.token;
+
+        //ALL NEWS
+      await fetch(`http://localhost:8080/api/news/all`,
         {
           method: "GET",
           headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + accessToken,
           }),
           mode: "cors"
         })
@@ -22,7 +27,7 @@ export default function NewsReader() {
         });
     }
     fetchData();
-  },[]);
+  },[keycloak.token]);
 
   return (
     <>
